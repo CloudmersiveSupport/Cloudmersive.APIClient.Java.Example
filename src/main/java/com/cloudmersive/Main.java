@@ -5,6 +5,7 @@ import com.cloudmersive.client.model.*;
 import com.cloudmersive.client.invoker.*;
 import com.cloudmersive.client.invoker.auth.*;
 import java.io.*;
+import com.cloudmersive.client.ScanApi;
 
 public class Main {
 
@@ -37,35 +38,19 @@ public class Main {
             ApiKeyAuth Apikey = (ApiKeyAuth) defaultClient.getAuthentication("Apikey");
             Apikey.setApiKey("f0c513bc-8c00-4491-830e-3e83b015feb6");
 
-            ConvertDocumentApi apiInstance = new ConvertDocumentApi();
-            File inputFile = new File("C:\\temp\\input.docx"); // File | Input file to perform the operation on.
-            try {
-                Object result = apiInstance.convertDocumentDocxToPdf(inputFile);
-                System.out.println(result);
-            } catch (ApiException e) {
-                System.err.println("Exception when calling ConvertDocumentApi#convertDocumentDocxToPdf");
-                e.printStackTrace();
-            }
 
+        // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+        //Apikey.setApiKeyPrefix("Token");
 
-
-            // Email API
-
-            EmailApi api = new EmailApi(client);
-
-
-            FullEmailValidationResponse result = api.emailFullValidation("support@cloudmersive.com");
-            System.out.println("Result: " + result.isValidAddress().toString() + " - " + result.getMailServerUsedForValidation());
-
-            // Barcode API
-
-            BarcodeLookupApi barcodeLookup = new BarcodeLookupApi(client);
-
-            BarcodeLookupResponse result2 = barcodeLookup.barcodeLookupEanLookup("4011200296908");
-            System.out.println(result2.toString());
-
-            GenerateBarcodeApi generate = new GenerateBarcodeApi(client);
-            generate.generateBarcodeEAN8("96385074");
+        ScanApi apiInstance = new ScanApi();
+        File inputFile = new File("C:\\temp\\test.exe"); // File | Input file to perform the operation on.
+        try {
+            VirusScanResult result = apiInstance.scanFile(inputFile);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ScanApi#scanFile");
+            e.printStackTrace();
+        }
 
 
         }
