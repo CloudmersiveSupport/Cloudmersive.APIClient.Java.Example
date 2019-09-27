@@ -33,10 +33,13 @@ public class Main {
             // Customer
 
             ApiClient defaultClient = Configuration.getDefaultApiClient();
+            defaultClient.setConnectTimeout(300000);
+            defaultClient.setReadTimeout(300000);
+            defaultClient.setWriteTimeout(300000);
 
             // Configure API key authorization: Apikey
             ApiKeyAuth Apikey = (ApiKeyAuth) defaultClient.getAuthentication("Apikey");
-            Apikey.setApiKey("f0c513bc-8c00-4491-830e-3e83b015feb6");
+            Apikey.setApiKey("YOUR-API-KEY-HERE");
 
 
         // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
